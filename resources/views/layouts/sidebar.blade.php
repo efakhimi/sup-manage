@@ -85,6 +85,42 @@
                 </li>
               </ul>
             </li>
+            <li class="nav-item has-treeview {{((Illuminate\Support\Facades\Route::is('customerList') 
+              or Illuminate\Support\Facades\Route::is('customerNew') ) ? 'menu-open' : '')}}">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fa fa-envelope-o"></i>
+                <p>
+                مشتری ها و قرارداد ها
+                  <i class="fa fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{ route('customerNew') }}" class="nav-link {{(Illuminate\Support\Facades\Route::is('customerNew') ? 'active' : '')}}">
+                    <i class="fa fa-circle-o nav-icon"></i>
+                    <p>مشتری جدید</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ route('customerList') }}" class="nav-link {{(Illuminate\Support\Facades\Route::is('customerList') ? 'active' : '')}}">
+                    <i class="fa fa-circle-o nav-icon"></i>
+                    <p>تمام مشتری ها</p>
+                  </a>
+                </li>
+                <!-- <li class="nav-item">
+                  <a href="{{ route('categoryNew') }}" class="nav-link {{(Illuminate\Support\Facades\Route::is('categoryNew') ? 'active' : '')}}">
+                    <i class="fa fa-circle-o nav-icon"></i>
+                    <p>قرارداد جدید</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ route('categoryList') }}" class="nav-link {{(Illuminate\Support\Facades\Route::is('categoryList') ? 'active' : '')}}">
+                    <i class="fa fa-circle-o nav-icon"></i>
+                    <p>تمام قرارداد ها</p>
+                  </a>
+                </li> -->
+              </ul>
+            </li>
             
             <!-- <li class="nav-item">
               <a href="pages/widgets.html" class="nav-link">

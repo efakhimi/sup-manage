@@ -40,7 +40,7 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'cname' => 'required|string|max:50|min:2|unique:customers,name',
+            'cname' => 'required|string|max:50|min:2|unique:customers,cname',
             'ctell' => 'nullable|string|max:50|min:4',
             'caddress' => 'nullable|string|max:50|min:4',
             'techname' => 'nullable|string|max:50|min:4',
@@ -104,7 +104,7 @@ class CustomerController extends Controller
             return redirect(route('customerList'))->with('statusErr', 'برای ویرایش باید یک مشتری انتخاب کرده باشید.');
 
         $validated = $request->validate([
-            'cname' => 'required|string|max:50|min:2|unique:customers,name',
+            'cname' => 'required|string|max:50|min:2|unique:customers,cname',
             'ctell' => 'nullable|string|max:50|min:4',
             'caddress' => 'nullable|string|max:50|min:4',
             'techname' => 'nullable|string|max:50|min:4',
