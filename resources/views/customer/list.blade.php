@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">دسته‌بندی مشکلات نرم‌افزاری</h1>
+            <h1 class="m-0 text-dark">مشتری ها</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-left">
               <li class="breadcrumb-item"><a href="{{ route('home') }}">خانه</a></li>
-              <li class="breadcrumb-item active">دسته‌بندی مشکلات نرم‌افزاری</li>
+              <li class="breadcrumb-item active">مشتری ها</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -40,38 +40,44 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">دسته‌بندی های موجود</h3>
+                <h3 class="card-title">مشتری های موجود</h3>
 
                 <div class="card-tools">
                     <div class="m-0 float-right">
-                        <button type="button" onclick="window.location.href='{{ route("categoryNew") }}'" class="btn btn-block btn-outline-success">جدید</button>
+                        <button type="button" onclick="window.location.href='{{ route("customerNew") }}'" class="btn btn-block btn-outline-success">جدید</button>
                     </div>
                 </div>
                 
               </div>
               <!-- /.card-header -->
               <div class="card-body p-0">
-                <table class="table">
+                <table id="example1" class="table table-bordered table-striped">
+
+                  <thead>
                   <tr>
                     <th style="width: 10px">#</th>
                     <th>عنوان</th>
+                    <th>تلفن شرکت</th>
+                    <th>رابط فنی</th>
+                    <th>تلفن رابط فنی</th>
                     <th>وضعیت</th>
                     <th>عملیات</th>
                   </tr>
                   
-                  @foreach ($categories as $cat)
+                  </thead>
+                  <tbody>
+                  @foreach ($customers as $customer)
                   <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $cat->name }}</td>
-                    <td><i class="nav-icon fa fa-circle-o text-{{ ($cat->active == 0 ? 'danger' : 'success') }}"></i></td>
+                    <td>{{ $customer->cname }}</td>
+                    <td>{{ $customer->ctell }}</td>
+                    <td>{{ $customer->techname }}</td>
+                    <td>{{ $customer->techtell }}</td>
+                    <td><i class="nav-icon fa fa-circle-o text-{{ ($customer->status == "فعال" ? 'success' : ($customer->status == "غیرفعال" ? 'secondary' : 'danger')) }}"></i>&nbsp;{{$customer->status}}</td>
                     <td>
-                        <button type="button" onclick="window.location.href='{{ route("categoryUpdateStatusSave")."/". $cat->id }}'" class="btn btn-outline-warning">
-                            <span class="text-{{ ($cat->active == 0 ? 'success' : 'danger') }}">{{ ($cat->active == 0 ? 'فعال' : 'غیرفعال') }}</span>
-                        </button>
+                        <button type="button" onclick="window.location.href='{{ route("customerUpdate")."/". $customer->id }}'" class="btn btn-outline-info">ویرایش</button>
                         &nbsp;
-                        <button type="button" onclick="window.location.href='{{ route("categoryUpdate")."/". $cat->id }}'" class="btn btn-outline-info">ویرایش</button>
-                        &nbsp;
-                        <button type="button" onclick="window.location.href='{{ route("categoryDelete")."/". $cat->id }}'" class="btn btn-outline-danger">حذف</button>
+                        <button type="button" onclick="window.location.href='{{ route("customerDelete")."/". $customer->id }}'" class="btn btn-outline-danger">حذف</button>
                         &nbsp;
 
                     </td>
@@ -80,52 +86,6 @@
                 </table>
               </div>
               <div class="card-footer clearfix">
-                @if ($categories->hasPages())
-                  <ul class="pagination pagination-sm m-0 float-right">
-          
-                    <!-- <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">&raquo;</a></li> -->
-                    
-                    @if (!$categories->onFirstPage())
-                        <li class="page-item">
-                            <a class="page-link" href="{{ ($categories->url(1)) }}">
-                                <i class="w-4 h-4" data-feather="chevrons-right"></i>
-                            </a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="{{ ($categories->previousPageUrl()) }}">
-                                <i class="w-4 h-4" data-feather="chevron-right"></i>
-                            </a>
-                        </li>
-
-                        <li class="page-item">
-                            <a class="page-link" href="{{ ($categories->url($categories->currentPage() - 1)) }}">{{ ($categories->currentPage() - 1) }}</a>
-                        </li>
-                    @endif
-                    <li class="page-item active">
-                        <a class="page-link" href="{{ ($categories->url($categories->currentPage())) }}">{{ ($categories->currentPage()) }}</a>
-                    </li>
-                    @if ($categories->hasMorePages())
-                        <li class="page-item">
-                            <a class="page-link" href="{{ ($categories->url($categories->currentPage() + 1)) }}">{{ ($categories->currentPage() + 1) }}</a>
-                        </li>
-                        
-                        <li class="page-item">
-                            <a class="page-link" href="{{ ($categories->nextPageUrl()) }}">
-                                <i class="w-4 h-4" data-feather="chevron-left"></i>
-                            </a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="{{ ($categories->url($categories->lastPage())) }}">
-                                <i class="w-4 h-4" data-feather="chevrons-left"></i>
-                            </a>
-                        </li>
-                    @endif
-                  </ul>
-                @endif
               </div>
               <!-- /.card-body -->
             </div>

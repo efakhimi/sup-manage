@@ -26,6 +26,9 @@
 <script src="{{ asset('/assets/plugins/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap -->
 <script src="{{ asset('/assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<!-- DataTables -->
+<script src="{{ asset('/assets/plugins/datatables/jquery.dataTables.js') }}"></script>
+<script src="{{ asset('/assets/plugins/datatables/dataTables.bootstrap4.js') }}"></script>
 <!-- AdminLTE -->
 <script src="{{ asset('/assets/dist/js/adminlte.js') }}"></script>
 
@@ -33,5 +36,23 @@
 <script src="{{ asset('/assets/plugins/chart.js/Chart.min.js') }}"></script>
 <script src="{{ asset('/assets/dist/js/demo.js') }}"></script>
 <script src="{{ asset('/assets/dist/js/pages/dashboard3.js') }}"></script>
+
+@if(Illuminate\Support\Facades\Route::is('customerList'))
+<!-- page script -->
+<script>
+  $(function () {
+    $("#example1").DataTable({
+        "language": {
+            "paginate": {
+                "next": "بعدی",
+                "previous" : "قبلی"
+            }
+        },
+        "info" : false,
+    });
+  });
+</script>
+@endif
+
 </body>
 </html>

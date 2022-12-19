@@ -84,10 +84,10 @@
                         </div>
                         <div class="col-sm-4">
                           <div class="form-group">
-                            <label for="techman" class="col-sm-12 control-label">وضعیت</label>
+                            <label for="status" class="col-sm-12 control-label">وضعیت</label>
 
                             <div class="col-sm-12">
-                              <select class="form-control">
+                              <select class="form-control" name="status" id="status">
                                 <option value="فعال">فعال</option>
                                 <option value="غیرفعال">غیرفعال</option>
                                 <option value="مسدود">مسدود</option>
