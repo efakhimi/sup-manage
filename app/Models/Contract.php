@@ -5,20 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Customer extends Model
+class Contract extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'cname',
-        'ctell',
-        'caddress',
-        'techname',
-        'techtell',
+        'cid',
+        'contract_no',
+        'start_date',
+        'end_date',
         'status',
     ];
 
-    public function contracts()
-    {
-        return $this->hasMany(Contract::class);
+    public function customer(){
+
+        return $this->belongsTo(Customer::class, 'cid', 'id');
     }
+
 }

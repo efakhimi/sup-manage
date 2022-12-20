@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">مشتری ها</h1>
+            <h1 class="m-0 text-dark">قرارداد ها</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-left">
               <li class="breadcrumb-item"><a href="{{ route('home') }}">خانه</a></li>
-              <li class="breadcrumb-item active">مشتری ها</li>
+              <li class="breadcrumb-item active">قرارداد ها</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -40,11 +40,11 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">مشتری های موجود</h3>
+                <h3 class="card-title">قرارداد های موجود</h3>
 
                 <div class="card-tools">
                     <div class="m-0 float-right">
-                        <button type="button" onclick="window.location.href='{{ route("customerNew") }}'" class="btn btn-block btn-outline-success">جدید</button>
+                        <button type="button" onclick="window.location.href='{{ route("contractNew") }}'" class="btn btn-block btn-outline-success">جدید</button>
                     </div>
                 </div>
                 
@@ -56,34 +56,32 @@
                   <thead>
                   <tr>
                     <th style="width: 10px">#</th>
-                    <th>عنوان</th>
-                    <th>تلفن شرکت</th>
-                    <th>رابط فنی</th>
-                    <th>تلفن رابط فنی</th>
+                    <th>عنوان شرکت</th>
+                    <th>شماره قرارداد</th>
+                    <th>تاریخ شروع قرارداد</th>
+                    <th>تاریخ پایان قرارداد</th>
                     <th>وضعیت</th>
                     <th>عملیات</th>
                   </tr>
                   
                   </thead>
                   <tbody>
-                  @foreach ($customers as $customer)
+                  @foreach ($contracts as $contract)
                   <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $customer->cname }}</td>
-                    <td>{{ $customer->ctell }}</td>
-                    <td>{{ $customer->techname }}</td>
-                    <td>{{ $customer->techtell }}</td>
-                    <td><i class="nav-icon fa fa-circle-o text-{{ ($customer->status == "فعال" ? 'success' : ($customer->status == "غیرفعال" ? 'secondary' : 'danger')) }}"></i>&nbsp;{{$customer->status}}</td>
+                    <td><a href="{{ route('contractShow')."/".$contract->id }}">{{ $contract->customer->cname }}</a></td>
+                    <td><a href="{{ route('contractShow')."/".$contract->id }}">{{ $contract->contract_no }}</a></td>
+                    <td>{{ \Morilog\Jalali\CalendarUtils::convertNumbers(\Morilog\Jalali\CalendarUtils::strftime('Y/m/d', strtotime($contract->start_date))) }}</td>
+                    <td>{{ \Morilog\Jalali\CalendarUtils::convertNumbers(\Morilog\Jalali\CalendarUtils::strftime('Y/m/d', strtotime($contract->end_date))) }}</td>
+                    <td><i class="nav-icon fa fa-circle-o text-{{ ($contract->status == 1 ? 'success' : 'danger') }}"></i>&nbsp;{{ ($contract->status == 0 ? 'غیرفعال' : 'فعال') }}</td>
                     <td>
-                        <button type="button" onclick="window.location.href='{{ route("customerUpdateStatusSave")."/". $customer->id }}'" class="btn btn-outline-warning">
-                            <span class="text-{{ ($customer->status == "فعال" ? 'danger' : 'success') }}">{{ ($customer->status == 'مسدود' ? 'فعال' : 'مسدود') }}</span>
+                        <button type="button" onclick="window.location.href='{{ route("contractUpdateStatusSave")."/". $contract->id }}'" class="btn btn-outline-warning">
+                            <span class="text-{{ ($contract->status == 1 ? 'danger' : 'success') }}">{{ ($contract->status == 1 ? 'غیرفعال' : 'فعال') }}</span>
                         </button>
                         &nbsp;
-                        <button type="button" onclick="window.location.href='{{ route("contractNewForCustomer")."/". $customer->id }}'" class="btn btn-outline-success">ثبت قرارداد جدید</button>
+                        <button type="button" onclick="window.location.href='{{ route("contractUpdate")."/". $contract->id }}'" class="btn btn-outline-info">ویرایش</button>
                         &nbsp;
-                        <button type="button" onclick="window.location.href='{{ route("customerUpdate")."/". $customer->id }}'" class="btn btn-outline-info">ویرایش</button>
-                        &nbsp;
-                        <button type="button" onclick="window.location.href='{{ route("customerDelete")."/". $customer->id }}'" class="btn btn-outline-danger">حذف</button>
+                        <button type="button" onclick="window.location.href='{{ route("contractDelete")."/". $contract->id }}'" class="btn btn-outline-danger">حذف</button>
                         &nbsp;
 
                     </td>

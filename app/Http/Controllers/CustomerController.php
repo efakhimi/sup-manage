@@ -104,7 +104,7 @@ class CustomerController extends Controller
             return redirect(route('customerList'))->with('statusErr', 'برای ویرایش باید یک مشتری انتخاب کرده باشید.');
 
         $validated = $request->validate([
-            'cname' => 'required|string|max:50|min:2|unique:customers,cname',
+            'cname' => 'required|string|max:50|min:2|unique:customers,cname,'.$id,
             'ctell' => 'nullable|string|max:50|min:4',
             'caddress' => 'nullable|string|max:50|min:4',
             'techname' => 'nullable|string|max:50|min:4',
@@ -144,5 +144,27 @@ class CustomerController extends Controller
             
         Customer::where('id', $id)->delete();
         return redirect(route('customerList'))->with('status', 'مشتری مورد نظر با موفقیت حذف شد.');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Category  $category
+     * @return \Illuminate\Http\Response
+     */
+    public function updateStatus($id)
+    {
+        if($id == null)
+            return redirect(route('customerList'))->with('statusErr', 'برای ویرایش باید یک مشتری انتخاب کرده باشید.');
+
+        $customer = Customer::where('id', $id)->first();
+        if($customer == null)
+            return redirect(route('customerList'))->with('statusErr', 'مشتری مورد نظر یافت نشد.');
+            
+        Customer::where('id', $id)->update([
+            'status'=> ($customer->status == 'مسدود' ? 'فعال' : 'مسدود')
+        ]);
+        return redirect(route('customerList'))->with('status', 'مشتری مورد نظر با موفقیت ویرایش شد.');
     }
 }

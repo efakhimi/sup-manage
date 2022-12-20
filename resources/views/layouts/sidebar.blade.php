@@ -86,7 +86,10 @@
               </ul>
             </li>
             <li class="nav-item has-treeview {{((Illuminate\Support\Facades\Route::is('customerList') 
-              or Illuminate\Support\Facades\Route::is('customerNew') ) ? 'menu-open' : '')}}">
+              or Illuminate\Support\Facades\Route::is('customerNew') 
+              or Illuminate\Support\Facades\Route::is('contractNew') 
+              or Illuminate\Support\Facades\Route::is('contractList') 
+              ) ? 'menu-open' : '')}}">
               <a href="#" class="nav-link">
                 <i class="nav-icon fa fa-envelope-o"></i>
                 <p>
@@ -107,18 +110,18 @@
                     <p>تمام مشتری ها</p>
                   </a>
                 </li>
-                <!-- <li class="nav-item">
-                  <a href="{{ route('categoryNew') }}" class="nav-link {{(Illuminate\Support\Facades\Route::is('categoryNew') ? 'active' : '')}}">
+                <li class="nav-item">
+                  <a href="{{ route('contractNew') }}" class="nav-link {{(Illuminate\Support\Facades\Route::is('contractNew') ? 'active' : '')}}">
                     <i class="fa fa-circle-o nav-icon"></i>
                     <p>قرارداد جدید</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{ route('categoryList') }}" class="nav-link {{(Illuminate\Support\Facades\Route::is('categoryList') ? 'active' : '')}}">
+                  <a href="{{ route('contractList') }}" class="nav-link {{(Illuminate\Support\Facades\Route::is('contractList') ? 'active' : '')}}">
                     <i class="fa fa-circle-o nav-icon"></i>
                     <p>تمام قرارداد ها</p>
                   </a>
-                </li> -->
+                </li>
               </ul>
             </li>
             
