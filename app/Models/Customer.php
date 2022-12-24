@@ -21,4 +21,8 @@ class Customer extends Model
     {
         return $this->hasMany(Contract::class);
     }
+    public function requests()
+    {
+        return $this->hasMany(SupportRequest::class);
+    }
 }

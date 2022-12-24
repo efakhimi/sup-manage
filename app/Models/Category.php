@@ -12,4 +12,9 @@ class Category extends Model
         'name',
         'active',
     ];
+    
+    public function requests()
+    {
+        return $this->hasMany(SupportRequest::class);
+    }
 }

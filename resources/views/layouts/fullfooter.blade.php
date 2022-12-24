@@ -72,7 +72,11 @@
 </script>
 @endif
 
-@if(Illuminate\Support\Facades\Route::is('contractNew') or Illuminate\Support\Facades\Route::is('contractUpdate') or Illuminate\Support\Facades\Route::is('contractNewForCustomer'))
+@if(Illuminate\Support\Facades\Route::is('contractNew') 
+  or Illuminate\Support\Facades\Route::is('contractUpdate') 
+  or Illuminate\Support\Facades\Route::is('contractNewForCustomer')
+  or Illuminate\Support\Facades\Route::is('supportNew')
+)
 <!-- page script -->
 <script>
   $(function () {

@@ -69,7 +69,7 @@ class ContractController extends Controller
         ]);
         
         $contract = new Contract();
-        $contract->cid = $request->cid;
+        $contract->customer_id = $request->cid;
         $contract->start_date = \Morilog\Jalali\CalendarUtils::createCarbonFromFormat('Y/m/d', \Morilog\Jalali\CalendarUtils::convertNumbers($request->start_date, true))->format('Y-m-d');
         $contract->end_date = \Morilog\Jalali\CalendarUtils::createCarbonFromFormat('Y/m/d', \Morilog\Jalali\CalendarUtils::convertNumbers($request->end_date, true))->format('Y-m-d');
         $contract->contract_no = $request->contract_no;

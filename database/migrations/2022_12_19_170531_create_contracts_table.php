@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('contracts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('cid');
-            $table->foreign('cid')->references('id')->on('customers')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('customer_id');
+            $table->foreign('customer_id')->references('id')->on('customers')->constrained()->onDelete('cascade');
             $table->string('contract_no', 30);
             $table->date('start_date');
             $table->date('end_date');

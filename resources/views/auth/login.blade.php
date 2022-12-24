@@ -3,7 +3,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../"><b>ورود به سایت</b></a>
+    <a href="../"><b>ورود به سامانه</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="card">

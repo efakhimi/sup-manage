@@ -55,342 +55,190 @@
             
             <li class="nav-item">
               <a href="{{ route('dashboard') }}" class="nav-link {{(Illuminate\Support\Facades\Route::is('dashboard') ? 'active' : '')}}">
-                <i class="fa fa-circle-o nav-icon"></i>
+                <i class="fa fa-desktop nav-icon"></i>
                 <p>داشبورد</p>
               </a>
             </li>
 
 
+            @if(
+              auth()->user()->hasPermissionTo('view_category') or 
+              auth()->user()->hasPermissionTo('edit_category') or 
+              auth()->user()->hasPermissionTo('delete_category') or 
+              auth()->user()->hasPermissionTo('create_category')
+            )
             <li class="nav-item has-treeview {{((Illuminate\Support\Facades\Route::is('categoryList') 
               or Illuminate\Support\Facades\Route::is('categoryNew') ) ? 'menu-open' : '')}}">
               <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-envelope-o"></i>
+                <i class="nav-icon fa fa-sitemap"></i>
                 <p>
                 دسته‌بندی مشکلات
                   <i class="fa fa-angle-left right"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
+                @if(auth()->user()->hasPermissionTo('create_category'))
                 <li class="nav-item">
                   <a href="{{ route('categoryNew') }}" class="nav-link {{(Illuminate\Support\Facades\Route::is('categoryNew') ? 'active' : '')}}">
-                    <i class="fa fa-circle-o nav-icon"></i>
+                    <i class="fa fa-tag nav-icon"></i>
                     <p>دسته‌بندی جدید</p>
                   </a>
                 </li>
+                @endif
+                @if(auth()->user()->hasPermissionTo('view_category') or auth()->user()->hasPermissionTo('edit_category') or auth()->user()->hasPermissionTo('delete_category'))
                 <li class="nav-item">
                   <a href="{{ route('categoryList') }}" class="nav-link {{(Illuminate\Support\Facades\Route::is('categoryList') ? 'active' : '')}}">
-                    <i class="fa fa-circle-o nav-icon"></i>
+                    <i class="fa fa-tags nav-icon"></i>
                     <p>تمام دسته‌بندی ها</p>
                   </a>
                 </li>
+                @endif
               </ul>
             </li>
+            @endif
+            @if(
+              auth()->user()->hasPermissionTo('view_customer') or 
+              auth()->user()->hasPermissionTo('edit_customer') or 
+              auth()->user()->hasPermissionTo('delete_customer') or 
+              auth()->user()->hasPermissionTo('create_customer') or
+              auth()->user()->hasPermissionTo('view_contract') or 
+              auth()->user()->hasPermissionTo('edit_contract') or 
+              auth()->user()->hasPermissionTo('delete_contract') or 
+              auth()->user()->hasPermissionTo('create_contract')
+            )
             <li class="nav-item has-treeview {{((Illuminate\Support\Facades\Route::is('customerList') 
               or Illuminate\Support\Facades\Route::is('customerNew') 
               or Illuminate\Support\Facades\Route::is('contractNew') 
               or Illuminate\Support\Facades\Route::is('contractList') 
               ) ? 'menu-open' : '')}}">
               <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-envelope-o"></i>
+                <i class="nav-icon fa fa-address-book-o"></i>
                 <p>
                 مشتری ها و قرارداد ها
                   <i class="fa fa-angle-left right"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
+                @if(auth()->user()->hasPermissionTo('create_customer'))
                 <li class="nav-item">
                   <a href="{{ route('customerNew') }}" class="nav-link {{(Illuminate\Support\Facades\Route::is('customerNew') ? 'active' : '')}}">
-                    <i class="fa fa-circle-o nav-icon"></i>
+                    <i class="fa fa-user-plus nav-icon"></i>
                     <p>مشتری جدید</p>
                   </a>
                 </li>
+                @endif
+                @if(auth()->user()->hasPermissionTo('view_customer') or auth()->user()->hasPermissionTo('edit_customer') or auth()->user()->hasPermissionTo('delete_customer'))
                 <li class="nav-item">
                   <a href="{{ route('customerList') }}" class="nav-link {{(Illuminate\Support\Facades\Route::is('customerList') ? 'active' : '')}}">
-                    <i class="fa fa-circle-o nav-icon"></i>
+                    <i class="fa fa-users nav-icon"></i>
                     <p>تمام مشتری ها</p>
                   </a>
                 </li>
+                @endif
+                @if(auth()->user()->hasPermissionTo('create_contract'))
                 <li class="nav-item">
                   <a href="{{ route('contractNew') }}" class="nav-link {{(Illuminate\Support\Facades\Route::is('contractNew') ? 'active' : '')}}">
-                    <i class="fa fa-circle-o nav-icon"></i>
+                    <i class="fa fa-edit nav-icon"></i>
                     <p>قرارداد جدید</p>
                   </a>
                 </li>
+                @endif
+                @if(auth()->user()->hasPermissionTo('view_contract') or auth()->user()->hasPermissionTo('edit_contract') or auth()->user()->hasPermissionTo('delete_contract'))
                 <li class="nav-item">
                   <a href="{{ route('contractList') }}" class="nav-link {{(Illuminate\Support\Facades\Route::is('contractList') ? 'active' : '')}}">
-                    <i class="fa fa-circle-o nav-icon"></i>
+                    <i class="fa fa-diamond nav-icon"></i>
                     <p>تمام قرارداد ها</p>
                   </a>
                 </li>
+                @endif
               </ul>
             </li>
-            
-            <!-- <li class="nav-item">
-              <a href="pages/widgets.html" class="nav-link">
-                <i class="nav-icon fa fa-th"></i>
-                <p>
-                  ویجت‌ها
-                  <span class="right badge badge-danger">جدید</span>
-                </p>
-              </a>
-            </li>
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-pie-chart"></i>
-                <p>
-                  چارت‌ها
-                  <i class="right fa fa-angle-left"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="pages/charts/chartjs.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>نمودار ChartJS</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/charts/flot.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>نمودار Flot</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/charts/inline.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>نمودار Inline</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-tree"></i>
-                <p>
-                  اشیای گرافیکی
-                  <i class="fa fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="pages/UI/general.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>عمومی</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/UI/icons.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>آیکون‌ها</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/UI/buttons.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>دکمه‌ها</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/UI/sliders.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>اسلایدر‌ها</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-edit"></i>
-                <p>
-                  فرم‌ها
-                  <i class="fa fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="pages/forms/general.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>اجزا عمومی</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/forms/advanced.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>پیشرفته</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/forms/editors.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>ویشرایشگر</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-table"></i>
-                <p>
-                  جداول
-                  <i class="fa fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="pages/tables/simple.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>جداول ساده</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/tables/data.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>جداول داده</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-header">مثال‌ها</li>
-            <li class="nav-item">
-              <a href="pages/calendar.html" class="nav-link">
-                <i class="nav-icon fa fa-calendar"></i>
-                <p>
-                  تقویم
-                  <span class="badge badge-info right">2</span>
-                </p>
-              </a>
-            </li>
-            <li class="nav-item has-treeview">
+            @endif
+            @if(auth()->user()->hasPermissionTo('view_suprequest') or auth()->user()->hasPermissionTo('edit_suprequest') or auth()->user()->hasPermissionTo('delete_suprequest') or auth()->user()->hasPermissionTo('create_suprequest'))
+            <li class="nav-item has-treeview {{((Illuminate\Support\Facades\Route::is('supportNew') 
+              or Illuminate\Support\Facades\Route::is('supportList') ) ? 'menu-open' : '')}}">
               <a href="#" class="nav-link">
                 <i class="nav-icon fa fa-envelope-o"></i>
                 <p>
-                  ایمیل‌ باکس
+                درخواست های پشتیبانی
                   <i class="fa fa-angle-left right"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
+                @if(auth()->user()->hasPermissionTo('create_suprequest'))
                 <li class="nav-item">
-                  <a href="pages/mailbox/mailbox.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>اینباکس</p>
+                  <a href="{{ route('supportNew') }}" class="nav-link {{(Illuminate\Support\Facades\Route::is('supportNew') ? 'active' : '')}}">
+                    <i class="fa fa-pencil-square-o nav-icon"></i>
+                    <p>ثبت درخواست پشتیبانی</p>
                   </a>
                 </li>
+                @endif
+                @if(auth()->user()->hasPermissionTo('view_suprequest') or auth()->user()->hasPermissionTo('edit_suprequest') or auth()->user()->hasPermissionTo('delete_suprequest'))
                 <li class="nav-item">
-                  <a href="pages/mailbox/compose.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>ایجاد</p>
+                  <a href="{{ route('supportList') }}" class="nav-link {{(Illuminate\Support\Facades\Route::is('supportList') ? 'active' : '')}}">
+                    <i class="fa fa-list-alt nav-icon"></i>
+                    <p>تمام درخواست ها</p>
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a href="pages/mailbox/read-mail.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>خواندن</p>
-                  </a>
-                </li>
+                @endif
               </ul>
             </li>
-            <li class="nav-item has-treeview">
+            @endif
+            @if(auth()->user()->hasPermissionTo('view_user') or auth()->user()->hasPermissionTo('edit_user') or auth()->user()->hasPermissionTo('delete_user') or auth()->user()->hasPermissionTo('create_user'))
+            <li class="nav-item has-treeview {{((Illuminate\Support\Facades\Route::is('usersNew') 
+              or Illuminate\Support\Facades\Route::is('roleNew')
+              or Illuminate\Support\Facades\Route::is('usersList') ) ? 'menu-open' : '')}}">
               <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-book"></i>
+                <i class="nav-icon fa fa-envelope-o"></i>
                 <p>
-                  صفحات
+                حساب های کاربری
                   <i class="fa fa-angle-left right"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
+                @if(auth()->user()->hasPermissionTo('create_user'))
                 <li class="nav-item">
-                  <a href="pages/examples/invoice.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>سفارشات</p>
+                  <a href="{{ route('usersNew') }}" class="nav-link {{(Illuminate\Support\Facades\Route::is('usersNew') ? 'active' : '')}}">
+                    <i class="fa fa-pencil-square-o nav-icon"></i>
+                    <p>حساب کاربری جدید</p>
                   </a>
                 </li>
+                @endif
+                @if(auth()->user()->hasPermissionTo('create_roles'))
                 <li class="nav-item">
-                  <a href="pages/examples/profile.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>پروفایل</p>
+                  <a href="{{ route('roleNew') }}" class="nav-link {{(Illuminate\Support\Facades\Route::is('roleNew') ? 'active' : '')}}">
+                    <i class="fa fa-pencil-square-o nav-icon"></i>
+                    <p>نقش کاربری جدید</p>
                   </a>
                 </li>
+                @endif
+                @if(auth()->user()->hasPermissionTo('view_user') or auth()->user()->hasPermissionTo('edit_user') or auth()->user()->hasPermissionTo('delete_user'))
                 <li class="nav-item">
-                  <a href="pages/examples/login.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>صفحه ورود</p>
+                  <a href="{{ route('usersList') }}" class="nav-link {{(Illuminate\Support\Facades\Route::is('usersList') ? 'active' : '')}}">
+                    <i class="fa fa-list-alt nav-icon"></i>
+                    <p>مدیریت حساب ها</p>
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a href="pages/examples/register.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>صفحه عضویت</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/examples/lockscreen.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>قفل صفحه</p>
-                  </a>
-                </li>
+                @endif
               </ul>
             </li>
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-plus-square-o"></i>
+                @endif
+            <li class="nav-item">
+              <a href="{{ route('userProfile') }}" class="nav-link">
+                <i class="nav-icon fa fa-user"></i>
                 <p>
-                  بیشتر
-                  <i class="fa fa-angle-left right"></i>
+                  پروفایل
                 </p>
               </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="pages/examples/404.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>ارور 404</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/examples/500.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>ارور 500</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/examples/blank.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>صفحه خالی</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="starter.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>صفحه شروع</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-header">متفاوت</li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-file"></i>
-                <p>مستندات</p>
-              </a>
-            </li>
-            <li class="nav-header">برچسب‌ها</li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-circle-o text-danger"></i>
-                <p class="text">مهم</p>
-              </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-circle-o text-warning"></i>
-                <p>هشدار</p>
+              <a href="{{ route('signout') }}" class="nav-link">
+                <i class="nav-icon fa fa-sign-out"></i>
+                <p>
+                  خروج
+                </p>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-circle-o text-info"></i>
-                <p>اطلاعات</p>
-              </a>
-            </li> -->
           </ul>
         </nav>
         <!-- /.sidebar-menu -->
